@@ -1,13 +1,9 @@
 import openpyxl
 import json
 from datetime import datetime
-from openpyxl.styles import PatternFill
 
 class State:
     HEADER, CAMPAIGN, INTEREST = range(3)
-
-def is_yellow(cell):
-    return cell.fill.start_color.index == 'FFFFFF00'  # Check for yellow background color
 
 def process_sheet(sheet):
     state = State.HEADER
@@ -24,7 +20,7 @@ def process_sheet(sheet):
 
         if state == State.INTEREST:
             campaign_data["interest"].append(list(row))
-        elif state == State.CAMPAIGN and is_yellow(sheet.cell(row=sheet.max_row, column=1)):  # Check yellow background for the last row
+        else:
             campaign_data["data"].append({
                 "effdate": str(row[0]),
                 "filename": str(row[1]),
@@ -41,7 +37,7 @@ def read_excel(file_path):
         sheet = workbook[sheet_name]
         campaign_data = process_sheet(sheet)
         result_dict[sheet_name] = {
-            "data": campaign_data["data"],
+            "data": campaign_data["data"][2:],  # Skip the first 2 rows in "data" (header and separator)
             "interest": campaign_data["interest"]
         }
 

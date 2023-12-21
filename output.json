@@ -1,0 +1,107 @@
+{
+  "ชีต1": {
+    "data": [
+      {
+        "effdate": "campaign1",
+        "filename": "effdate",
+        "remark": "filename"
+      },
+      {
+        "effdate": "1.0",
+        "filename": "2022-10-10 00:00:00",
+        "remark": "x.txt"
+      },
+      {
+        "effdate": "2.0",
+        "filename": "2022-10-11 00:00:00",
+        "remark": "y.txt"
+      },
+      {
+        "effdate": "3.0",
+        "filename": "2022-10-11 00:00:00",
+        "remark": "xx"
+      },
+      {
+        "effdate": "4.0",
+        "filename": "2022-12-11 00:00:00",
+        "remark": "12.0"
+      },
+      {
+        "effdate": "None",
+        "filename": "None",
+        "remark": "None"
+      },
+      {
+        "effdate": "ignore this",
+        "filename": "None",
+        "remark": "None"
+      },
+      {
+        "effdate": "None",
+        "filename": "None",
+        "remark": "None"
+      }
+    ],
+    "interest": [
+      [
+        1000.0,
+        0.01,
+        0.02,
+        null,
+        null,
+        null
+      ],
+      [
+        2000.0,
+        0.02,
+        0.03,
+        null,
+        null,
+        null
+      ],
+      [
+        3000.0,
+        0.02,
+        0.03,
+        null,
+        null,
+        null
+      ],
+      [
+        4000.0,
+        0.02,
+        0.03,
+        null,
+        null,
+        null
+      ]
+    ]
+  },
+  "ชีต2": {
+    "data": [
+      {
+        "effdate": "4.0",
+        "filename": "c5",
+        "remark": "cc2"
+      }
+    ],
+    "interest": [
+      [
+        2.0,
+        0.01,
+        0.02,
+        null,
+        null,
+        null
+      ],
+      [
+        3.0,
+        0.02,
+        0.03,
+        null,
+        null,
+        null
+      ]
+    ]
+  }
+}
