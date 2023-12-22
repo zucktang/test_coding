@@ -24,3 +24,5 @@ a = [5, 2, 3, 4, 10, 11]
 b = [5, 7, 26, 16, 5, 10, 12]
 result_c = generate_c(a, b)
 print(result_c)
+
+time complexity = O(MN^2)
