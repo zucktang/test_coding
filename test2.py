@@ -1,18 +1,13 @@
 import openpyxl
 
 
-def get_next_row_cell(cell_coordinate, i=1):
-    col_letter = cell_coordinate[0]
-    col_number = cell_coordinate[1:]
-    new_col_number = int(col_number) + i
-    new_coordinate = f"{col_letter}{new_col_number}"
-    return new_coordinate
-
-def get_next_col_cell(cell_coordinate, i=1):
-    col_letter = cell_coordinate[0]
-    new_col_letter = chr(ord(col_letter) + i)
-    new_coordinate = f"{new_col_letter}{cell_coordinate[1:]}"
-    return new_coordinate
+def get_next_coordinate(cell_coordinate, i=1, is_row=True):
+    col_letter, col_number = cell_coordinate[0], int(cell_coordinate[1:])
+    if is_row:
+        col_number = col_number + i
+    else:
+        col_letter = chr(ord(col_letter) + i)
+    return f"{col_letter}{col_number}"
 
     
 def read_excel(file_name):
@@ -21,14 +16,8 @@ def read_excel(file_name):
     red_color = 'FFFF0000'
     result = {}
     for sheet in wb:
-        campaign_cols = {}
-        yellow_background_cols = []
-        interest_rate_cols = {}
-        campaign_values = ['filename', 'effdate', 'remark']
-        campaign_name = ''
-        filename_coordinate = ''
-        effdate_coordinate = ''
-        remark_coordinate = ''
+        campaign_cols, interest_rate_cols = {}, {}
+        campaign_name, filename_coordinate, effdate_coordinate, remark_coordinate = '', '', '', ''
         for col in sheet.iter_cols():
             for cell in col:
                 if cell.fill.fgColor.rgb == yellow_color:
@@ -52,9 +41,9 @@ def read_excel(file_name):
         i = 1
         while i<=loops:
             
-            effdate = get_next_row_cell(effdate_coordinate, i)
-            filename = get_next_row_cell(filename_coordinate, i)
-            remark = get_next_row_cell(remark_coordinate, i)
+            effdate = get_next_coordinate(effdate_coordinate, i)
+            filename = get_next_coordinate(filename_coordinate, i)
+            remark = get_next_coordinate(remark_coordinate, i)
             data_dict={"effdate": campaign_cols[effdate].strftime("%Y/%m/%d"),
                        "filename": campaign_cols[filename],
                        "remark": campaign_cols[remark]}
@@ -64,7 +53,7 @@ def read_excel(file_name):
         for index, (key, value) in enumerate(interest_rate_cols.items()):
             data_in_rows = []
             for i in range(3):
-                next_col = get_next_col_cell(key,i)
+                next_col = get_next_coordinate(key, i, False)
                 if next_col in interest_rate_cols:
                     data_in_rows.append(interest_rate_cols[next_col])
             interest_list.append(data_in_rows)
